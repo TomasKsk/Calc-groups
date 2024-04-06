@@ -24,7 +24,7 @@ const Numbers = ({ display, setDisplay }) => {
     const handleNumber = (num) => {
         //check if the display is 0 text or int
         // and either push the new number or change the sum to the current number
-        if (display.sum != 0) {
+        if (display.sum.length > 1) {
             setDisplay(prev => ({
                 ...prev,
                 sum: prev.sum + num
@@ -40,7 +40,7 @@ const Numbers = ({ display, setDisplay }) => {
     // function to handle '.' '=' 'C' buttons and its functions
     const handleOperator = (op) => {
         //handle the digit
-        if (op === '.' && display.sum.length > 0) {
+        if (op === '.') {
             handleDigit();
         }
 
@@ -58,7 +58,8 @@ const Numbers = ({ display, setDisplay }) => {
     // handle '.' button
     const handleDigit = () => {
         //firstly check if '.' exists in the sum
-        const tempArr = display.sum.split('');
+        const tempSel = display.sum;
+        const tempArr = display.sum.toString().split('');
 
         if (!tempArr.includes('.')) {
             setDisplay(prev => ({
