@@ -1,11 +1,13 @@
-import './StyledButtons.css'
+import { useState } from 'react';
+import './StyledButtons.css';
 
 const Numbers = ({ display, setDisplay }) => {
-    const buttons = [...Array(10).keys(), '.', 'C', '='];
+    let [delSw, setDelSw] = useState(false);
+    const buttons = [...Array(10).keys(), '.', 'C', '='];   // CE as clear everything
 
     const handleClick = (e) => {
         const selector = e.target.textContent;
-        
+
         //we split the conditions by checking if the textcontent after conversion can be a integer
         if (!isNaN(+selector)) {
            handleNumber(selector);
@@ -31,14 +33,61 @@ const Numbers = ({ display, setDisplay }) => {
     };
 
     const handleOperator = (op) => {
-        console.log('this is an operator', op)
+        //handle the digit
+        if (op === '.' && display.sum.length > 0) {
+            handleDigit();
+        }
+
+        if (op === 'C' || op === 'CE') {
+            handleDelete(op);
+        }
+
+        if (op === '=') {
+            handleSum();
+        }
+    };
+
+    // handle '.' button
+    const handleDigit = () => {
+        //firstly check if '.' exists in the sum
+        const tempArr = display.sum.split('');
+
+        if (!tempArr.includes('.')) {
+            setDisplay(prev => ({
+                ...prev,
+                sum: prev.sum + '.'
+            }));
+        }
     }
+
+    const handleDelete = (op) => {
+        if (op === 'C') {
+            setDisplay({
+                mem: [],
+                sum: 0
+            });
+
+            setDelSw(prev => !prev) // change the C delete button
+
+        } else {
+            setDelSw(prev => !prev) // change the C delete button
+
+            setDisplay(prev => ({
+                ...prev,
+                sum: 0
+            }));
+
+            // if calcMem has an array of nums, then change the CE to C
+        };
+    };
 
     return(
         <div className='allbuttons grid grid-cols-4 grid-flow-row-dense'>
             {
-                buttons.map((_,a) => (
-                    <button onClick={(e) => handleClick(e)} key={a} type="button" className={` text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-400 font-medium text-4xl aspect-square bg-gray-200 rounded`}>{buttons[a]}</button>
+                buttons.map((a,b) => (
+                    <button onClick={(e) => handleClick(e)} key={b} type="button" className={` text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-400 font-medium text-4xl aspect-square bg-gray-200 rounded`}>
+                        {a === 'C' ? (delSw ? 'C' : 'CE') : a}
+                    </button>
                 ))
             }
         </div>
