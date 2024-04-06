@@ -1,14 +1,37 @@
 import './StyledButtons.css'
 
-const Numbers = () => {
+const Numbers = ({ display, setDisplay }) => {
     const buttons = [...Array(10).keys(), '.', 'C', '='];
 
     const handleClick = (e) => {
         const selector = e.target.textContent;
-        console.log(+selector)
         
         //we split the conditions by checking if the textcontent after conversion can be a integer
-        
+        if (!isNaN(+selector)) {
+           handleNumber(selector);
+        } else {
+            handleOperator(selector);
+        };        
+    };
+
+    const handleNumber = (num) => {
+        //check if the display is 0 text or int
+        // and either push the new number or change the sum to the current number
+        if (display.sum != 0) {
+            setDisplay(prev => ({
+                ...prev,
+                sum: prev.sum + num
+            }))
+        } else {
+            setDisplay(prev => ({
+                ...prev,
+                sum: num
+            }));
+        };
+    };
+
+    const handleOperator = (op) => {
+        console.log('this is an operator', op)
     }
 
     return(
