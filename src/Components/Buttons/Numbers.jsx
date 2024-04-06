@@ -2,13 +2,17 @@ import { useState } from 'react';
 import './StyledButtons.css';
 
 const Numbers = ({ display, setDisplay }) => {
-    let [delSw, setDelSw] = useState(false);
-    const buttons = [...Array(10).keys(), '.', 'C', '='];   // CE as clear everything
+    // used for the C delete button to change its textContent
+    let [delSw, setDelSw] = useState(false); 
 
+    // populate the number, plus operand buttons
+    const buttons = [...Array(10).keys(), '.', 'C', '='];
+
+    // function to handle user clicks on buttons
     const handleClick = (e) => {
         const selector = e.target.textContent;
 
-        //we split the conditions by checking if the textcontent after conversion can be a integer
+        //we split the conditions if the clicked button is a number or an operand
         if (!isNaN(+selector)) {
            handleNumber(selector);
         } else {
@@ -16,6 +20,7 @@ const Numbers = ({ display, setDisplay }) => {
         };        
     };
 
+    // function to add numbers to the sum
     const handleNumber = (num) => {
         //check if the display is 0 text or int
         // and either push the new number or change the sum to the current number
@@ -32,16 +37,19 @@ const Numbers = ({ display, setDisplay }) => {
         };
     };
 
+    // function to handle '.' '=' 'C' buttons and its functions
     const handleOperator = (op) => {
         //handle the digit
         if (op === '.' && display.sum.length > 0) {
             handleDigit();
         }
 
+        // handle delete
         if (op === 'C' || op === 'CE') {
             handleDelete(op);
         }
 
+        // end the calculation
         if (op === '=') {
             handleSum();
         }
@@ -67,17 +75,15 @@ const Numbers = ({ display, setDisplay }) => {
                 sum: 0
             });
 
-            setDelSw(prev => !prev) // change the C delete button
+            if (display.mem.length > 0) {setDelSw(prev => !prev)} // change the C delete button if the calc memory is not empty
 
         } else {
-            setDelSw(prev => !prev) // change the C delete button
-
             setDisplay(prev => ({
                 ...prev,
                 sum: 0
             }));
 
-            // if calcMem has an array of nums, then change the CE to C
+            if (display.mem.length > 0) {setDelSw(prev => !prev)} // change the C delete button if the calc memory is not empty
         };
     };
 
