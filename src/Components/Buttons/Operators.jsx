@@ -5,12 +5,37 @@ const Operators = ({ display, setDisplay }) => {
     const handleClick = (e) => {
         const selector = e.target.textContent;
         
-        // the calcmem has to have already something in to be able to push an operator
+        const last = display.mem.slice(-1)
+        
+        // the main condition is to check if the calcMem is empty
         if (display.mem.length > 0) {
-            setDisplay(prev => ({
-                ...prev,
-                sum: [prev.sum, +selector]
-            }));
+            // if sum is not zero
+            if (display.sum > 0) {
+                // add the number to the mem array
+                // erase the sum
+                setDisplay(prev => ({
+                    mem: [...prev.mem, prev.sum, selector],
+                    sum: 0
+                }));
+            } else {
+                // check the last item, if its an int
+                if (isNaN(+last)) {
+                    // you can change the last operand
+                    setDisplay(prev => ({
+                        ...prev,
+                        mem: [prev.mem.slice(0,-1), selector]
+                    }));
+                }
+            }
+
+        } else {
+            // other wise check if sum has a number
+            if (display.sum > 0) {
+                setDisplay(prev => ({
+                    mem: [prev.sum, selector],
+                    sum: 0
+                }));
+            }
         }
     };
 

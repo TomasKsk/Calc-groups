@@ -22,9 +22,10 @@ const Numbers = ({ display, setDisplay }) => {
 
     // function to add numbers to the sum
     const handleNumber = (num) => {
+        if (delSw) {setDelSw(false)}
         //check if the display is 0 text or int
         // and either push the new number or change the sum to the current number
-        if (display.sum.length > 1) {
+        if (display.sum.length > 0) {
             setDisplay(prev => ({
                 ...prev,
                 sum: prev.sum + num
@@ -69,6 +70,7 @@ const Numbers = ({ display, setDisplay }) => {
         }
     }
 
+    // handle Delete
     const handleDelete = (op) => {
         if (op === 'C') {
             setDisplay({
@@ -87,6 +89,11 @@ const Numbers = ({ display, setDisplay }) => {
             if (display.mem.length > 0) {setDelSw(prev => !prev)} // change the C delete button if the calc memory is not empty
         };
     };
+
+    // handle Sum '=' button
+    const handleSum = () => {
+        // firstly, run the function only in case sum is not zero
+    }
 
     return(
         <div className='allbuttons grid grid-cols-4 grid-flow-row-dense'>
