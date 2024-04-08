@@ -10,12 +10,13 @@ const App = () => {
   });
   
   const [storage, setStorage] = useState([]);
+  const [storeIcon, setStoreIcon] = useState(false)
 
   return(
-    <div className='flex flex-col'>
-      <Display display={display} setDisplay={setDisplay} storage={storage} setStorage={setStorage} />
-      <Buttons display={display} setDisplay={setDisplay} />
-      <Storage display={display} setDisplay={setDisplay} storage={storage} setStorage={setStorage} /> 
+    <div className='flex flex-col relative size-full'>
+      <Display display={display} setDisplay={setDisplay} storage={storage} setStorage={setStorage} storeIcon={storeIcon} setStoreIcon={setStoreIcon} />
+      <Buttons display={display} setDisplay={setDisplay} storeIcon={storeIcon} setStoreIcon={setStoreIcon} />
+      <Storage display={display} setDisplay={setDisplay} storage={storage} setStorage={setStorage} storeIcon={storeIcon} setStoreIcon={setStoreIcon} /> 
     </div>
   )
 }
