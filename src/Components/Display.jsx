@@ -10,7 +10,8 @@ const Display = ({ display, setDisplay, storage, setStorage, storeIcon, setStore
             ...prev,
             [`calc_${index + 1}`]: {
                 ...display,
-                comments: Array(display.mem.length).fill('')
+                comments: Array(display.mem.length).fill('...'),
+                name: `calc_${index + 1}`
             }
         }));
 

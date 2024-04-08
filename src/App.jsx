@@ -6,7 +6,7 @@ import Storage from './Components/Storage';
 const App = () => {
   const [display, setDisplay] = useState({
     mem: [],
-    sum: 0
+    sum: ''
   });
   
   const [storage, setStorage] = useState([]);

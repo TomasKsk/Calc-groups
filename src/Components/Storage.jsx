@@ -1,43 +1,81 @@
 import React, { useState, useEffect } from 'react';
 
 const Storage = ({ display, setDisplay, storage, setStorage, storeIcon, setStoreIcon }) => {
-    const storegePos = !storeIcon ? '100%' : '0%'
+    const storegePos = !storeIcon ? '100%' : '0%';
 
     return(
         <div 
             style={{height: '75%', right: storegePos, transition: 'right 0.7s ease-in-out'}} 
-            className='flex flex-col size-full absolute bottom-0 items-center flex-nowrap bg-gray-200/90 bg-gradient-to-b from-slate-300/50'
+            className='flex flex-col size-full absolute bottom-0 items-center flex-nowrap bg-gray-200/90 bg-gradient-to-b from-slate-300/50 border-gray-600 border-double border-t-4'
         >
                 <h1 className='font-black text-xl'>Calculator Storage</h1>
-                <div className='size-full p-2'>
-                    <div id='calc_01' style={{width:'30%'}} className='bg-white p-2'>
-                        <div className='flex flex-row justify-between border-b-2 border-black pb-2'>
-                            <h2 className='font-black'>calc_01</h2>
-                            <button>x</button>
-                        </div>
-                        <div>
-                            <div className='flex gap-4'>
-                                <p>5</p>
-                                <p>...</p>
-                            </div>
-                            <p>+</p>
-                            <div className='flex gap-4'>
-                                <p>5</p>
-                                <p>...</p>
-                            </div>
-                            <p>=</p>
-                        </div>
-                        <div className='flex justify-between font-bold'>
-                            <h2>10</h2>
-                            <button>
-                                Add
-                            </button>
-                        </div>
-                    </div>
+
+                <div className='flex size-full p-2 justify-around'>
+
+                    {/* Storage item */}
+                    {
+                        Object.keys(storage).map(a => {
+                            return <Item id={storage[a].name} item={storage[a]} />
+                        })
+                    }
+
                 </div>
-            
         </div>
-    )
-}
+    );
+};
 
 export default Storage;
+
+
+
+const Item = ({ id, item }) => {
+    return(
+        <div id={id} style={{width:'30%'}} className='bg-white p-2 flex flex-col h-fit shadow-md hover:shadow-xl'>
+            {/* header */}
+            <div className='flex flex-row justify-between border-b-2 border-black pb-2'>
+                <h2 className='font-black'>
+                    {item.name}
+                </h2>
+                <Button text={'x'}/>
+            </div>
+            {/* body */}
+            <div>
+                <ItemList item={item} />
+            </div>
+            {/* sum */}
+            <div className='flex justify-between items-center font-bold border-t-2 border-black pt-2'>
+                <h2>{item.mem[item.mem.length - 1]}</h2>
+                <Button text={'Add'}/>
+            </div>
+        </div>
+    );
+};
+
+const Button = ({ text }) => {
+    return(
+        <button className='flex duration-100 bg-gray-200 px-2 border-solid border-2 border-gray-500 rounded-md shadow-md hover:bg-gray-300 active:translate-y-1 active:bg-yellow-100'>
+            {text}
+        </button>
+    );
+};
+
+const ItemList = ({ item }) => {
+    return(
+        <>
+            {item.mem.map((a, b) => {
+                if (isNaN(+a)) {
+                    return <p key={b}>{a}</p>;
+                } else {
+                    return (
+                        <div key={b} className='flex gap-4'>
+                            <p>{a}</p>
+                            <p>{item.comments[b]}</p>
+                        </div>
+                    );
+                }
+            })}
+            {<p>=</p>}
+        </>
+    );
+};
+

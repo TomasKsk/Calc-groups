@@ -40,7 +40,7 @@ const Operators = ({ display, setDisplay }) => {
 
         } else {
             // other wise check if sum has a number
-            if (display.sum !== 0) {
+            if (display.sum !== '') {
                 setDisplay(prev => ({
                     mem: [prev.sum, selector],
                     sum: ''
