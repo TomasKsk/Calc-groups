@@ -60,7 +60,7 @@ const Numbers = ({ display, setDisplay }) => {
     const handleDigit = () => {
         //firstly check if '.' exists in the sum
         const tempSel = display.sum;
-        const tempArr = display.sum.toString().split('');
+        const tempArr = tempSel.toString().split('');
 
         if (!tempArr.includes('.')) {
             setDisplay(prev => ({
@@ -75,7 +75,7 @@ const Numbers = ({ display, setDisplay }) => {
         if (op === 'C') {
             setDisplay({
                 mem: [],
-                sum: 0
+                sum: ''
             });
 
             if (display.mem.length > 0) {setDelSw(prev => !prev)} // change the C delete button if the calc memory is not empty
@@ -83,7 +83,7 @@ const Numbers = ({ display, setDisplay }) => {
         } else {
             setDisplay(prev => ({
                 ...prev,
-                sum: 0
+                sum: ''
             }));
 
             if (display.mem.length > 0) {setDelSw(prev => !prev)} // change the C delete button if the calc memory is not empty
@@ -92,7 +92,58 @@ const Numbers = ({ display, setDisplay }) => {
 
     // handle Sum '=' button
     const handleSum = () => {
-        // firstly, run the function only in case sum is not zero
+        const last = display.mem[display.mem.length - 1];
+
+        // function to make the calculation of the array
+        const calculate = (arr) => {
+            console.log(arr)
+                const tempCalc = (arr) => {
+                console.log(arr)
+                let [a,op,b] = [+arr[0], arr[1], +arr[2]];
+
+                switch(op) {
+                    case '+':
+                        return a + b;
+                    case '-':
+                        return a - b;
+                    case 'x':
+                        return a * b;
+                    case '/':
+                        return a / b;
+                };
+            };
+
+            let result = tempCalc(arr.splice(0,3));
+            console.log(result)
+            while(arr.length > 0) {
+                result = tempCalc([result, ...arr.splice(0,2)]);
+            };
+            return result;
+        }
+
+        // firstly check if the sum is not zero
+        if (display.sum !== '') {
+            if (isNaN(+last)) {
+                // last item = operand
+                // const calc = eval([...display.mem, display.sum].join(''));
+                const calc = calculate([...display.mem, display.sum])
+    
+                setDisplay(prev => ({
+                    mem: [...prev.mem, prev.sum],
+                    sum: calc
+                }));
+            } else {
+                // add also the last operand used
+                // const calc = eval([...display.mem, display.mem[display.mem.length - 2], display.sum].join(''));
+                const tempSel = display.mem
+                const calc = calculate([...tempSel, tempSel[tempSel.length - 2], tempSel[tempSel.length - 1]])
+
+                setDisplay(prev => ({
+                    mem: [...prev.mem, prev.mem[prev.mem.length - 2], prev.mem[prev.mem.length - 1]],
+                    sum: calc
+                }));
+            }
+        }
     }
 
     return(

@@ -10,13 +10,23 @@ const Operators = ({ display, setDisplay }) => {
         // the main condition is to check if the calcMem is empty
         if (display.mem.length > 0) {
             // if sum is not zero
-            if (display.sum > 0) {
+            if (display.sum !== '') {
                 // add the number to the mem array
                 // erase the sum
-                setDisplay(prev => ({
-                    mem: [...prev.mem, prev.sum, selector],
-                    sum: 0
-                }));
+                if (isNaN(+last)) {
+                    // last = operand
+                    setDisplay(prev => ({
+                        mem: [...prev.mem, prev.sum, selector],
+                        sum: ''
+                    }));
+                } else {
+                    console.log('isnan')
+                    setDisplay(prev => ({
+                        mem: [prev.sum, selector],
+                        sum: ''
+                    }));
+                };
+
             } else {
                 // check the last item, if its an int
                 if (isNaN(+last)) {
@@ -30,10 +40,10 @@ const Operators = ({ display, setDisplay }) => {
 
         } else {
             // other wise check if sum has a number
-            if (display.sum > 0) {
+            if (display.sum !== 0) {
                 setDisplay(prev => ({
                     mem: [prev.sum, selector],
-                    sum: 0
+                    sum: ''
                 }));
             }
         }
