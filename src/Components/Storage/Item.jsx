@@ -1,11 +1,12 @@
+import { useState } from 'react';
+
 import ItemList from "./ItemList";
 
 const Item = ({ id, item, storage, setStorage }) => {
+    const [itemName, setItemName] = useState(item.name);
 
-    const handleDelete = (name) => {
+    const handleDelete = (id) => {
         let newObj = {...storage};
-        // find the object key in the object.name
-        const id = Object.keys(storage).filter(a => storage[a].name === name)[0];
 
         // check if the key exists
         if (newObj[id]) {
@@ -25,17 +26,14 @@ const Item = ({ id, item, storage, setStorage }) => {
                 }
             });
         } else {
-            alert('object key not found')
+            alert('object key not found');
         }
 
         setStorage(newObj)
     };
 
-    const handleAdd = (name) => {
+    const handleAdd = () => {
         // find the object key in the object.name
-        const id = Object.keys(storage).filter(a => storage[a].name === name)[0];
-        console.log(id)
-
         setStorage(prev => ({
             ...prev,
             [id]: {
@@ -46,13 +44,33 @@ const Item = ({ id, item, storage, setStorage }) => {
         }));
     };
 
+    const handleNameChange = (e) => {
+        setItemName(e.target.value)
+    }
+
+    const headerRename = () => {
+        setStorage(prev => ({
+            ...prev,
+            [id]: {
+                ...prev[id],
+                name: itemName
+            }
+        }));
+    };
+
     return(
         <div id={id} style={{width:'30%'}} className='bg-white p-2 flex flex-col h-fit shadow-md hover:shadow-xl'>
             {/* header */}
             <div className='flex flex-row justify-between border-b-2 border-black pb-2'>
-                <h2 className='font-black'>
-                    {item.name}
-                </h2>
+                <div>
+                    <input 
+                        type="text"
+                        value={itemName}
+                        onChange={handleNameChange}
+                        onBlur={headerRename}
+                        className='font-black border-none outline-none w-full pr-1'
+                    />
+                </div>
                 <p onClick={() => handleDelete(id)}>
                     <Button  text={'x'}/>
                 </p>
@@ -63,8 +81,8 @@ const Item = ({ id, item, storage, setStorage }) => {
             </div>
             {/* sum */}
             <div className='flex justify-between items-center font-bold border-t-2 border-black pt-2'>
-                <h2>{item.mem[item.mem.length - 1]}</h2>
-                <p onClick={() => handleAdd(id)}>
+                <h2>{item.sum}</h2>
+                <p onClick={handleAdd}>
                     <Button text={'Add'}/>
                 </p>
             </div>

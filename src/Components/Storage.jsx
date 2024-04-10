@@ -14,7 +14,7 @@ const Storage = ({ display, setDisplay, storage, setStorage, storeIcon, setStore
                     {/* Storage item */}
                     {
                         Object.keys(storage).map(a => {
-                            return <Item id={storage[a].name} item={storage[a]} storage={storage} setStorage={setStorage} />
+                            return <Item id={a} item={storage[a]} storage={storage} setStorage={setStorage} />
                         })
                     }
 
