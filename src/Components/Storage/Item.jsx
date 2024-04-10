@@ -5,7 +5,7 @@ const Item = ({ id, item, storage, setStorage }) => {
     const handleDelete = (name) => {
         let newObj = {...storage};
         // find the object key in the object.name
-        const id = Object.keys(storage).filter(a => storage[a].name === name)[0]
+        const id = Object.keys(storage).filter(a => storage[a].name === name)[0];
 
         // check if the key exists
         if (newObj[id]) {
@@ -31,6 +31,21 @@ const Item = ({ id, item, storage, setStorage }) => {
         setStorage(newObj)
     };
 
+    const handleAdd = (name) => {
+        // find the object key in the object.name
+        const id = Object.keys(storage).filter(a => storage[a].name === name)[0];
+        console.log(id)
+
+        setStorage(prev => ({
+            ...prev,
+            [id]: {
+                ...prev[id],
+                mem: [...prev[id].mem, '+', '0'],
+                comments: [...prev[id].comments, '...', '...']
+            }
+        }));
+    };
+
     return(
         <div id={id} style={{width:'30%'}} className='bg-white p-2 flex flex-col h-fit shadow-md hover:shadow-xl'>
             {/* header */}
@@ -49,7 +64,9 @@ const Item = ({ id, item, storage, setStorage }) => {
             {/* sum */}
             <div className='flex justify-between items-center font-bold border-t-2 border-black pt-2'>
                 <h2>{item.mem[item.mem.length - 1]}</h2>
-                <Button text={'Add'}/>
+                <p onClick={() => handleAdd(id)}>
+                    <Button text={'Add'}/>
+                </p>
             </div>
         </div>
     );
