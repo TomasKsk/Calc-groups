@@ -1,9 +1,6 @@
-import { useState } from 'react';
-
 import ItemList from "./ItemList";
 
 const Item = ({ id, item, storage, setStorage }) => {
-    const [itemName, setItemName] = useState(item.name);
 
     const handleDelete = (id) => {
         let newObj = {...storage};
@@ -44,16 +41,12 @@ const Item = ({ id, item, storage, setStorage }) => {
         }));
     };
 
-    const handleNameChange = (e) => {
-        setItemName(e.target.value)
-    }
-
-    const headerRename = () => {
+    const headerRename = (e) => {
         setStorage(prev => ({
             ...prev,
             [id]: {
                 ...prev[id],
-                name: itemName
+                name: e
             }
         }));
     };
@@ -65,9 +58,8 @@ const Item = ({ id, item, storage, setStorage }) => {
                 <div>
                     <input 
                         type="text"
-                        value={itemName}
-                        onChange={handleNameChange}
-                        onBlur={headerRename}
+                        value={item.name}
+                        onChange={(e) => headerRename(e.target.value)}
                         className='font-black border-none outline-none w-full pr-1'
                     />
                 </div>
