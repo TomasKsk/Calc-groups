@@ -11,11 +11,10 @@ const Storage = ({ display, setDisplay, storage, setStorage, storeIcon, setStore
                 <h1 className='font-black text-xl'>Calculator Storage</h1>
 
                 <div className='flex size-full p-2 justify-around'>
-
                     {/* Storage item */}
                     {
                         Object.keys(storage).map(a => {
-                            return <Item id={storage[a].name} item={storage[a]} />
+                            return <Item id={storage[a].name} item={storage[a]} storage={storage} setStorage={setStorage} />
                         })
                     }
 
@@ -28,7 +27,18 @@ export default Storage;
 
 
 
-const Item = ({ id, item }) => {
+const Item = ({ id, item, storage, setStorage }) => {
+
+    const handleDelete = (id) => {
+        let newObj = {...storage};
+        console.log(id, newObj)
+        if (storage.hasOwnProperty(id)) {
+            delete newObj[id]
+            console.log('deleted')
+            setStorage(newObj)
+        }
+    }
+
     return(
         <div id={id} style={{width:'30%'}} className='bg-white p-2 flex flex-col h-fit shadow-md hover:shadow-xl'>
             {/* header */}
@@ -36,7 +46,9 @@ const Item = ({ id, item }) => {
                 <h2 className='font-black'>
                     {item.name}
                 </h2>
-                <Button text={'x'}/>
+                <p onClick={() => handleDelete(id)}>
+                    <Button  text={'x'}/>
+                </p>
             </div>
             {/* body */}
             <div>
