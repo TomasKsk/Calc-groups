@@ -9,8 +9,15 @@ const App = () => {
     sum: ''
   });
   
-  const [storage, setStorage] = useState([]);
-  const [storeIcon, setStoreIcon] = useState(false)
+  const [storage, setStorage] = useState(
+    JSON.parse(localStorage.getItem('Calc_save')) || [] // get the storage item or make a new array
+  );
+  const [storeIcon, setStoreIcon] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('Calc_save', JSON.stringify(storage));
+    console.log('saved storage')
+  }, [storage]);
 
   return(
     <div className='flex flex-col relative size-full'>
