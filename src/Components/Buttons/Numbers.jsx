@@ -96,9 +96,7 @@ const Numbers = ({ display, setDisplay }) => {
 
         // function to make the calculation of the array
         const calculate = (arr) => {
-            console.log(arr)
                 const tempCalc = (arr) => {
-                console.log(arr)
                 let [a,op,b] = [+arr[0], arr[1], +arr[2]];
 
                 switch(op) {
@@ -114,7 +112,6 @@ const Numbers = ({ display, setDisplay }) => {
             };
 
             let result = tempCalc(arr.splice(0,3));
-            console.log(result)
             while(arr.length > 0) {
                 result = tempCalc([result, ...arr.splice(0,2)]);
             };

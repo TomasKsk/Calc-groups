@@ -1,6 +1,6 @@
 import ItemList from "./ItemList";
 
-const Item = ({ id, item, storage, setStorage }) => {
+const Item = ({ id, item, storage, setStorage, setDisplay }) => {
 
     const handleDelete = (id) => {
         let newObj = {...storage};
@@ -58,6 +58,14 @@ const Item = ({ id, item, storage, setStorage }) => {
         }
     }
 
+    // when the user clicks an item outside editable inputs, it will copy the sum to the display
+    const copySum = () => {
+        setDisplay(prev => ({
+            ...prev,
+            sum: item.sum
+        }))
+    };
+
     return(
         <div id={id} className='bg-white p-2 h-fit shadow-md hover:shadow-xl'>
             {/* header */}
@@ -70,19 +78,20 @@ const Item = ({ id, item, storage, setStorage }) => {
                         className='font-black border-none outline-none w-full pr-1'
                         onClick={(e) => e.target.select()}
                         onKeyDown={(e) => handleKeyPress(e)}
+                        style={{overflowWrap: 'normal'}}
                     />
                 </div>
-                <p onClick={() => handleDelete(id)}>
+                <p key={id} onClick={() => handleDelete(id)}>
                     <Button  text={'x'}/>
                 </p>
             </div>
             {/* body */}
-            <div>
                 <ItemList item={item} id={id} storage={storage} setStorage={setStorage} />
-            </div>
             {/* sum */}
             <div className='flex justify-between items-center font-bold border-t-2 border-black pt-2'>
-                <h2>{item.sum}</h2>
+                <h2 className='cursor-pointer' onClick={() => copySum()}>
+                    {item.sum}
+                </h2>
                 <p onClick={handleAdd}>
                     <Button text={'Add'}/>
                 </p>

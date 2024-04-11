@@ -19,7 +19,6 @@ const ItemList = ({ item, id, storage, setStorage }) => {
         };
 
         let result = tempCalc(arr.splice(0,3));
-        console.log(result)
         while(arr.length > 0) {
             result = tempCalc([result, ...arr.splice(0,2)]);
         };
@@ -39,14 +38,16 @@ const ItemList = ({ item, id, storage, setStorage }) => {
 
     // reentering a number
     const handleNum = (index, e) => {
-
-        setStorage(prev => ({
-            ...prev,
-            [id]: {
-                ...prev[id],
-                mem: prev[id].mem.map((a,b) => b === index ? e : a)
-            }
-        }));
+        // to prevent the user to type strings
+        if (!isNaN(+e)) {
+            setStorage(prev => ({
+                ...prev,
+                [id]: {
+                    ...prev[id],
+                    mem: prev[id].mem.map((a,b) => b === index ? e : a)
+                }
+            }));
+        }
     };
 
     const handleSum = () => {
@@ -56,8 +57,22 @@ const ItemList = ({ item, id, storage, setStorage }) => {
                 ...prev[id],
                 sum: calculate([...item.mem])
             }
-        }))
-    }
+        }));
+    };
+
+    const handleOp = (index, e) => {
+        // to prevent the user to type other than operators
+        if (['+', '-', '*', '/', 'x'].includes(e)) {
+            if (e === '*') {e = 'x'};
+            setStorage(prev => ({
+                ...prev,
+                [id]: {
+                    ...prev[id],
+                    mem: prev[id].mem.map((a,b) => b === index ? e : a)
+                }
+            }));
+        }
+    };
 
     // if the user presses enter the item will be autoblured / focused out
     const handleKeyPress = (e) => {
@@ -70,19 +85,31 @@ const ItemList = ({ item, id, storage, setStorage }) => {
         <>
             {item.mem.map((a, b) => {
                 if (isNaN(+a)) {
-                    return <p key={b}>{a}</p>; // in case of operator
+                    // in case of operator
+                    return <p key={b}>
+                        <input 
+                                type="text"
+                                value={item.mem[b]}
+                                onChange={(e) => handleOp(b, e.target.value)}
+                                className='border-none outline-none w-full pr-1'
+                                onClick={(e) => e.target.select()}
+                                onKeyDown={(e) => handleKeyPress(e)}
+                                onBlur={() => handleSum()}
+                            />
+                    </p>; 
                 } else {
                     return (
-                        // in case of a number
+                        // Number
                         <div key={b} className='flex gap-4'>
                             <input 
                                 type="text"
                                 value={item.mem[b]}
                                 onChange={(e) => handleNum(b, e.target.value)}
-                                className='border-none outline-none w-full pr-1'
+                                className='border-none outline-none pr-1'
                                 onClick={(e) => e.target.select()}
                                 onKeyDown={(e) => handleKeyPress(e)}
                                 onBlur={() => handleSum()}
+                                style={{width: `${(item.mem[b]).toString().length + 1}ch`}} // to readjust the width of the input by +2 characters
                             />
 
                             <input 

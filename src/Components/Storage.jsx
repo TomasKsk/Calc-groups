@@ -3,6 +3,19 @@ import Item from "./Storage/Item";
 const Storage = ({ display, setDisplay, storage, setStorage, storeIcon, setStoreIcon }) => {
     const storegePos = !storeIcon ? '100%' : '0%';
 
+    let [first, second, third] = [{}, {}, {}];
+    let arr = Object.keys(storage);
+
+    arr.forEach((key, index) => {
+        if (index % 3 === 0) {
+            first[key] = storage[key];
+        } else if (index % 3 === 1) {
+            second[key] = storage[key];
+        } else {
+            third[key] = storage[key];
+        }
+    });
+
     return(
         <div 
             style={{height: '75%', right: storegePos, transition: 'right 0.7s ease-in-out'}} 
@@ -10,13 +23,33 @@ const Storage = ({ display, setDisplay, storage, setStorage, storeIcon, setStore
         >
                 <h1 className='font-black text-xl'>Calculator Storage</h1>
 
-                <div className='grid grid-cols-3 p-2'>
-                    {/* Storage item */}
-                    {
-                        Object.keys(storage).map(a => {
-                            return <Item id={a} item={storage[a]} storage={storage} setStorage={setStorage} />
-                        })
-                    }
+                <div style={{scrollbarWidth: 'thin'}} className='flex flex-row justify-center gap-2 p-2 overflow-y-auto'>
+                    {/* Column 1 */}
+                    <div className='flex flex-col gap-2 w-auto'>
+                        {
+                            Object.keys(first).map((a,b) => {
+                                return <Item key={a} id={a} item={storage[a]} storage={storage} setStorage={setStorage} setDisplay={setDisplay} />
+                            })
+                        }
+                    </div>
+
+                    {/* Column 2 */}
+                    <div className='flex flex-col gap-2 w-auto'>
+                        {
+                            Object.keys(second).map((a,b) => {
+                                return <Item key={a}  id={a} item={storage[a]} storage={storage} setStorage={setStorage} setDisplay={setDisplay} />
+                            })
+                        }
+                    </div>
+
+                    {/* Column 3 */}
+                    <div className='flex flex-col gap-2 w-auto'>
+                        {
+                            Object.keys(third).map((a,b) => {
+                                return <Item key={a}  id={a} item={storage[a]} storage={storage} setStorage={setStorage} setDisplay={setDisplay} />
+                            })
+                        }
+                    </div>
 
                 </div>
         </div>
