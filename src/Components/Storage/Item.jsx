@@ -51,8 +51,15 @@ const Item = ({ id, item, storage, setStorage }) => {
         }));
     };
 
+    // if the user presses enter the item will be autoblured / focused out
+    const handleKeyPress = (e) => {
+        if (e.keyCode == 13) {
+            e.target.blur()
+        }
+    }
+
     return(
-        <div id={id} style={{width:'30%'}} className='bg-white p-2 flex flex-col h-fit shadow-md hover:shadow-xl'>
+        <div id={id} className='bg-white p-2 h-fit shadow-md hover:shadow-xl'>
             {/* header */}
             <div className='flex flex-row justify-between border-b-2 border-black pb-2'>
                 <div>
@@ -61,6 +68,8 @@ const Item = ({ id, item, storage, setStorage }) => {
                         value={item.name}
                         onChange={(e) => headerRename(e.target.value)}
                         className='font-black border-none outline-none w-full pr-1'
+                        onClick={(e) => e.target.select()}
+                        onKeyDown={(e) => handleKeyPress(e)}
                     />
                 </div>
                 <p onClick={() => handleDelete(id)}>
@@ -69,7 +78,7 @@ const Item = ({ id, item, storage, setStorage }) => {
             </div>
             {/* body */}
             <div>
-                <ItemList item={item} />
+                <ItemList item={item} id={id} storage={storage} setStorage={setStorage} />
             </div>
             {/* sum */}
             <div className='flex justify-between items-center font-bold border-t-2 border-black pt-2'>

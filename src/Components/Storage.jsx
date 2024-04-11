@@ -10,7 +10,7 @@ const Storage = ({ display, setDisplay, storage, setStorage, storeIcon, setStore
         >
                 <h1 className='font-black text-xl'>Calculator Storage</h1>
 
-                <div className='flex size-full p-2 justify-around'>
+                <div className='grid grid-cols-3 p-2'>
                     {/* Storage item */}
                     {
                         Object.keys(storage).map(a => {

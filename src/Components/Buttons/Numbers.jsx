@@ -146,6 +146,9 @@ const Numbers = ({ display, setDisplay }) => {
         }
     }
 
+    // checking if the mem array has changed
+    
+
     return(
         <div className='allbuttons grid grid-cols-4 grid-flow-row-dense'>
             {

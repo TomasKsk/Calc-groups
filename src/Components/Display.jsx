@@ -27,9 +27,9 @@ const Display = ({ display, setDisplay, storage, setStorage, storeIcon, setStore
         setStoreIcon(prev => !prev)
     }
 
-    useEffect(() => {
-        console.log(storage)
-    },[storage])
+    // useEffect(() => {
+    //     console.log(storage)
+    // },[storage])
 
     return(
         <div className='overflow-hidden flex flex-col background w-full h-24 justify-center items-center bg-gradient-to-r border-double border-4 border-gray-200 rounded-t-xl relative'>

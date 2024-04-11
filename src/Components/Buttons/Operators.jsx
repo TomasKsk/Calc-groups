@@ -9,7 +9,7 @@ const Operators = ({ display, setDisplay }) => {
         
         // the main condition is to check if the calcMem is empty
         if (display.mem.length > 0) {
-            // if sum is not zero
+            // if sum is not empty
             if (display.sum !== '') {
                 // add the number to the mem array
                 // erase the sum
