@@ -16,14 +16,15 @@ const App = () => {
 
   useEffect(() => {
     localStorage.setItem('Calc_save', JSON.stringify(storage));
-    console.log('saved storage')
   }, [storage]);
 
   return(
-    <div className='flex flex-col relative size-full'>
-      <Display display={display} setDisplay={setDisplay} storage={storage} setStorage={setStorage} storeIcon={storeIcon} setStoreIcon={setStoreIcon} />
-      <Buttons display={display} setDisplay={setDisplay} storeIcon={storeIcon} setStoreIcon={setStoreIcon} />
+    <div className='flex flex-row max-w-[1400px] min-w-[350px] items-center justify-center size-full'>
       <Storage setDisplay={setDisplay} storage={storage} setStorage={setStorage} storeIcon={storeIcon} /> 
+      <div className='flex flex-col size-full overflow-auto items-center overflow-y-auto'>
+        <Display display={display} setDisplay={setDisplay} storage={storage} setStorage={setStorage} storeIcon={storeIcon} setStoreIcon={setStoreIcon} />
+        <Buttons display={display} setDisplay={setDisplay} storeIcon={storeIcon} setStoreIcon={setStoreIcon} />
+      </div>
     </div>
   )
 }
