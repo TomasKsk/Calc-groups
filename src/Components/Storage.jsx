@@ -1,6 +1,6 @@
 import Item from "./Storage/Item";
 
-const Storage = ({ display, setDisplay, storage, setStorage, storeIcon, setStoreIcon }) => {
+const Storage = ({ setDisplay, storage, setStorage, storeIcon }) => {
     const storegePos = !storeIcon ? '100%' : '0%';
 
     let [first, second, third] = [{}, {}, {}];

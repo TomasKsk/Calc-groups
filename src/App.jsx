@@ -23,7 +23,7 @@ const App = () => {
     <div className='flex flex-col relative size-full'>
       <Display display={display} setDisplay={setDisplay} storage={storage} setStorage={setStorage} storeIcon={storeIcon} setStoreIcon={setStoreIcon} />
       <Buttons display={display} setDisplay={setDisplay} storeIcon={storeIcon} setStoreIcon={setStoreIcon} />
-      <Storage display={display} setDisplay={setDisplay} storage={storage} setStorage={setStorage} storeIcon={storeIcon} setStoreIcon={setStoreIcon} /> 
+      <Storage setDisplay={setDisplay} storage={storage} setStorage={setStorage} storeIcon={storeIcon} /> 
     </div>
   )
 }
