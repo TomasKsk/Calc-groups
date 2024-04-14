@@ -6,7 +6,9 @@ In addition to standard calculator functionality, this app provides the ability 
 
 Upon saving, a new object is created and stored in the app's local storage. Subsequently, a new HTML container is populated with the calculation numbers, operators, and a header in the calculator storage window. The header utilizes a general naming convention "calc_$," followed by the count of items. Clicking on the header activates the renaming function, allowing you to edit the name. After hitting enter or focusing out of the text, the calculation object and HTML are updated, and the local storage object is saved. The original "calc_$" name remains as the object key to preserve sorting.
 
-![](docs/group-calc-02-B.jpg)
+![](public/calc-groups-windows.gif)
+![](public/calc-groups-all-funcs.gif)
+
 
 
 ## Comments
@@ -27,6 +29,12 @@ When removing a calculation with the X button next to the header, the function f
 
 ## Combining storage items
 Storage calculation items serve as a base for subsequent calculations. Clicking the sum area of the item container copies the sum number to your current calculator display. Close the storage window, add operators and numbers, or revisit the storage to select a different calculation. For instance, combine expense and income calculations to determine the remaining sum.
+
+
+## Draft layout
+Before building the Application, I made a sketch of how the layout of this app should look like to have a better understanding of the components structure and how and where to place the state objects.
+![image](public/draft-layout.png)
+
 
 
 # Setup
