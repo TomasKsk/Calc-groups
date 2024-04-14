@@ -18,7 +18,7 @@ const Storage = ({ setDisplay, storage, setStorage, storeIcon }) => {
 
     return(
         <div 
-            className={`flex flex-col items-center relative min-w-300 size-full p-2 right-0 max-[750px]:right-${storegePos} max-[750px]:bottom-0 max-[750px]:h-4/5 max-[750px]:absolute bg-gray-200/90 bg-gradient-to-b from-slate-300/50 border-gray-600 border-solid border-8`}
+            className={`flex flex-col items-center relative min-w-300 size-full p-2 right-0 max-[750px]:right-${storegePos} max-[750px]:bottom-0 max-[750px]:h-4/5 max-[750px]:absolute bg-gray-200/90 bg-gradient-to-b from-slate-300/50 border-gray-600 border-solid border-8 rounded-t-xl`}
             style={{transition: 'right 0.7s'}}
         >
                 <h1 className='font-black text-xl'>Calculator Storage</h1>

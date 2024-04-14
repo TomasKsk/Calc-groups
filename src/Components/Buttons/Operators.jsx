@@ -46,14 +46,25 @@ const Operators = ({ display, setDisplay }) => {
                     sum: ''
                 }));
             }
-        }
+        };
     };
+
+    const styles = {
+        '*:focus': {
+            all: 'unset'
+        }
+    }
 
     return(
         <div className='grid grid-cols-4'>
             {
                 buttons.map(a => (
-                    <button onClick={(e) => handleClick(e)} key={a} type="button" className="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-400 font-medium text-4xl grow aspect-square bg-gray-200 rounded">{a}</button>
+                    <button onClick={(e) => handleClick(e)} key={a} type="button" 
+                        className="text-gray-900 active:text-white border border-gray-800 active:bg-gray-400 font-medium text-4xl grow aspect-square bg-gray-200 rounded"
+                        style={styles}
+                    >
+                        {a}
+                    </button>
                 ))
             }
         </div>

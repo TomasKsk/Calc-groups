@@ -150,7 +150,7 @@ const Numbers = ({ display, setDisplay }) => {
         <div className='allbuttons grid grid-cols-4 grid-flow-row-dense size-full'>
             {
                 buttons.map((a,b) => (
-                    <button onClick={(e) => handleClick(e)} key={b} type="button" className={` text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-400 font-medium text-4xl  bg-gray-200 rounded`}>
+                    <button onClick={(e) => handleClick(e)} key={b} type="button" className={` text-gray-900 active:text-white border border-gray-800 active:bg-gray-400 font-medium text-4xl  bg-gray-200 rounded`}>
                         {a === 'C' ? (delSw ? 'C' : 'CE') : a}
                     </button>
                 ))

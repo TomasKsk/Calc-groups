@@ -26,7 +26,7 @@ const Display = ({ display, setDisplay, storage, setStorage, storeIcon, setStore
     }
 
     return(
-        <div className='overflow-hidden flex flex-col background w-full min-w-350 min-h-32 min-[750px]:h-60 justify-center items-center bg-gradient-to-r border-double border-4 border-gray-200 rounded-t-xl relative'>
+        <div className='overflow-hidden flex flex-col background w-full min-w-350 min-h-32 min-[750px]:h-60 justify-center items-center bg-gradient-to-r border-double border-8 border-gray-800 rounded-t-xl relative'>
             <h1 className='font-bold text-lg min-[750px]:text-4xl text-right pr-2 absolute top-2 right-2'>
                 {/** display memmory */}
                 {display.mem}
@@ -43,15 +43,15 @@ const Display = ({ display, setDisplay, storage, setStorage, storeIcon, setStore
             {/* storage icon */}
             {/** render upon width of parent */}
             {
-                (pageWidth < 750) &&
-                    <button onClick={() => handleMenu()} className='absolute top-2 left-2 flex h-6 w-6 font-bold text-gray-500 justify-center'>
-                        {(!storeIcon) ? 
-                            <svg className="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"/>
-                            </svg>
-                            : 'X'
-                        }
-                    </button>
+                // (pageWidth < 750) &&
+                <button onClick={() => handleMenu()} className='absolute top-2 left-2 flex h-6 w-6 font-bold text-gray-500 justify-center'>
+                    {(!storeIcon) ? 
+                        <svg className="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                        : 'X'
+                    }
+                </button>
             }
 
         </div>
