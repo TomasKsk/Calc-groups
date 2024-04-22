@@ -77,7 +77,7 @@ const Item = ({ id, item, storage, setStorage, setDisplay }) => {
                         onChange={(e) => headerRename(e.target.value)}
                         className='font-black border-none outline-none w-full pr-1'
                         onClick={(e) => e.target.select()}
-                        onKeyDown={(e) => handleKeyPress(e)}
+                        onKeyDown={handleKeyPress}
                         style={{overflowWrap: 'normal'}}
                     />
                 </div>
