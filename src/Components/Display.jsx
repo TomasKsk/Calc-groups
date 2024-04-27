@@ -8,7 +8,6 @@ const Display = ({ display, setDisplay, storage, setStorage, storeIcon, setStore
     };
   
     useEffect(() => {
-        console.log(window.innerWidth)
         // Add event listener to update window width when the window is resized
         window.addEventListener('resize', handleResize);
     

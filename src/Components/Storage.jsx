@@ -7,7 +7,6 @@ const Storage = ({ setDisplay, storage, setStorage, storeIcon }) => {
 
     // instead of direct media queries because they werent stable
     useEffect(() => {
-        console.log(window.innerWidth)
         const handleResize = () => {
             if (window.innerWidth <= 750) {
                 setMediaStyle({
